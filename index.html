@@ -135,7 +135,8 @@ const CATS=[
   {id:'vegetation',n:'Vegetação', i:'🌿',c:'#2D7A3A'},
   {id:'fauna',     n:'Fauna',     i:'🦜',c:'#7B3F00'},
   {id:'culture',   n:'Cultura',   i:'🌎',c:'#6B2080'},
-];
+,
+  {id:'loja', n:'Loja', i:'Loja', c:'#B8720A'}];
 const SKS=[
   {id:'water',       l:'Água',          i:'💧',c:'#1B6CA8'},
   {id:'carbon',      l:'Carbono',       i:'🌿',c:'#2D7A3A'},
@@ -860,8 +861,4 @@ function renderShop(){var el=document.getElementById("shopItems");if(!el)return;
 function exportPNG(){try{var cv=document.getElementById("c"),off=document.createElement("canvas");off.width=cv.width;off.height=cv.height;var ctx=off.getContext("2d");ctx.drawImage(cv,0,0);ctx.fillStyle="rgba(0,0,0,.6)";ctx.fillRect(0,cv.height-44,cv.width,44);ctx.fillStyle="#fff";ctx.font="bold 14px Arial";ctx.textAlign="center";ctx.fillText("🌿 Pantanal em Bloco — Este Pantanal é Meu!",cv.width/2,cv.height-26);ctx.font="11px Arial";ctx.fillStyle="#f0c040";ctx.fillText("🪙 "+carbonTokens+" Tokens | Grade "+GRID+"×"+GRID+" | ernandes-sobreira.github.io/pantanal-em-bloco",cv.width/2,cv.height-7);var a=document.createElement("a");a.download="Meu-Pantanal-Eco.png";a.href=off.toDataURL("image/png");a.click();}catch(e){alert("Erro: "+e.message);}}
 </script>
 </body>
-</html>,
-  {id:'loja', n:'Loja', i:'Loja', c:'#B8720A'}
-,
-  {id:"compra",n:"Compras",i:"🏪",c:"#8B6914"}
-
+</html>
