@@ -128,7 +128,8 @@ const CATS=[
   {id:'vegetation',n:'Vegetação', i:'🌿',c:'#2D7A3A'},
   {id:'fauna',     n:'Fauna',     i:'🦜',c:'#7B3F00'},
   {id:'culture',   n:'Cultura',   i:'🌎',c:'#6B2080'},
-];
+,
+  {id:'loja', n:'Loja', i:'Loja', c:'#B8720A'}];
 const SKS=[
   {id:'water',       l:'Água',          i:'💧',c:'#1B6CA8'},
   {id:'carbon',      l:'Carbono',       i:'🌿',c:'#2D7A3A'},
@@ -839,6 +840,24 @@ function rebuildGrid(g){
 
 function renderShop(){var el=document.getElementById("shopItems");if(!el)return;el.innerHTML="";if(!window._unlocked)window._unlocked=new Set();Object.entries(BT).filter(function(kv){return kv[1].cat==="compra";}).forEach(function(kv){var k=kv[0],b=kv[1],has=window._unlocked.has(k),ca=carbonTokens>=(b.cost||0);var btn=document.createElement("button");btn.className="sbtn"+(has?" unlocked":"");if(!has&&!ca)btn.setAttribute("disabled","1");var im=IMG[k]?"<img src='"+IMG[k]+"'> ":"<span style='font-size:20px'>"+b.e+"</span>";btn.innerHTML=im+"<div><span class='sn'>"+b.n+"</span><span class='sc"+((has||ca)?" ok":"")+"'>"+(has?"✅ Desbloqueado":"🪙 "+b.cost+" tokens")+"</span></div>";btn.onclick=function(){if(!has&&ca){carbonTokens-=b.cost;window._unlocked.add(k);scTokenUI();renderShop();buildPalette();if(typeof renderShop==="function")renderShop();var n=document.getElementById("notif");if(n){n.textContent="🎉 "+b.n+" desbloqueado!";n.style.opacity=1;setTimeout(function(){n.style.opacity=0;},3200);}}else if(has){sel=k;document.querySelectorAll(".bb").forEach(function(x){x.classList.remove("act");});}};el.appendChild(btn);});}
 function exportPNG(){try{var cv=document.getElementById("c"),off=document.createElement("canvas");off.width=cv.width;off.height=cv.height;var ctx=off.getContext("2d");ctx.drawImage(cv,0,0);ctx.fillStyle="rgba(0,0,0,.6)";ctx.fillRect(0,cv.height-44,cv.width,44);ctx.fillStyle="#fff";ctx.font="bold 14px Arial";ctx.textAlign="center";ctx.fillText("🌿 Pantanal em Bloco — Este Pantanal é Meu!",cv.width/2,cv.height-26);ctx.font="11px Arial";ctx.fillStyle="#f0c040";ctx.fillText("🪙 "+carbonTokens+" Tokens | Grade "+GRID+"×"+GRID,cv.width/2,cv.height-7);var a=document.createElement("a");a.download="Meu-Pantanal-Eco.png";a.href=off.toDataURL("image/png");a.click();}catch(e){alert("Erro: "+e.message);}}
+
+function exportPantanal(){
+  renderer.render(sc,cam);
+  const cvs=document.getElementById("c");
+  const out=document.createElement("canvas");
+  out.width=cvs.width; out.height=cvs.height+80;
+  const oc=out.getContext("2d");
+  oc.fillStyle="#1A4A1A"; oc.fillRect(0,0,out.width,80);
+  oc.fillStyle="#FFD700"; oc.font="bold 24px Arial"; oc.textAlign="center";
+  oc.fillText("ESSE PANTANAL E MEU!",out.width/2,28);
+  oc.fillStyle="#AAFFAA"; oc.font="13px Arial";
+  oc.fillText("T:"+carbonTokens+" "+GRID+"x"+GRID+" A:"+score.water+" C:"+score.carbon+" B:"+score.biodiversity,out.width/2,55);
+  oc.drawImage(cvs,0,80);
+  const a=document.createElement("a"); a.download="meu-pantanal.png"; a.href=out.toDataURL("image/png"); a.click();
+  const n=document.getElementById("notif");
+  if(n){n.textContent="Salvo!";n.style.opacity=1;setTimeout(()=>{n.style.opacity=0;},3000);}
+}
 </script>
+<button onclick="exportPantanal()" style="position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#2D7A3A;color:#fff;border:none;padding:10px 24px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;z-index:20;">Salvar PNG</button>
 </body>
 </html>
