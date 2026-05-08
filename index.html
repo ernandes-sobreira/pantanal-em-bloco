@@ -56,6 +56,8 @@ canvas{display:block}
 </head>
 <body>
 <canvas id="c"></canvas>
+<div id="shareOverlay" onclick="closeShare()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:99;"></div>
+<div id="shareModal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:18px;padding:24px 28px;z-index:100;box-shadow:0 8px 42px rgba(0,0,0,.55);max-width:96vw;text-align:center;min-width:300px;"><h3 style="margin:0 0 6px;color:#2D7A3A;font-size:19px;">🌏 Este Pantanal é Meu!</h3><p id="shareScore" style="color:#555;font-size:13px;margin:2px 0 8px;"></p><canvas id="shareCanvas" style="max-width:500px;width:100%;border-radius:10px;display:block;margin:8px auto;"></canvas><div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;"><button style="background:#2D7A3A;color:#fff;padding:9px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:700;" onclick="downloadPNG()">⬇️ Baixar PNG</button><button style="background:#1B6CA8;color:#fff;padding:9px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:700;" onclick="copyPNG()">📋 Copiar</button><button style="background:#eee;color:#333;padding:9px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:700;" onclick="closeShare()">Fechar</button></div></div>
 <div id="shopPanel"><div class="sh">🏪 Loja — Tokens de Carbono</div><div id="shopItems"></div></div>
 <button id="exportBtn" onclick="exportPNG()">📷 Este Pantanal é Meu!</button>
 <div id="tokenBar" style="position:fixed;top:0;left:50%;transform:translateX(-50%);background:rgba(20,80,20,.92);color:#fff;padding:5px 22px;border-radius:0 0 14px 14px;font-size:13px;font-weight:700;z-index:20;text-align:center;letter-spacing:.3px;">🪙 <strong>0</strong> Tokens de Carbono<br><small style="font-weight:400;opacity:.85">Serviços ambientais do seu ecossistema</small></div>
@@ -118,11 +120,11 @@ const BT={
   pesquisa: {n:'Est. Pesquisa',  e:'🔬',cat:'culture',  cs:'#6C3483',bio:'Monitoram carbono, metano e biodiversidade — ciência que defende o bioma!',fx:{culture:5,biodiversity:2,carbon:2},img:true,big:true},
   comunidade:{n:'Comunidade Rural',e:'🌾',cat:'culture', cs:'#CA6F1E',bio:'Pantaneiros tradicionais: pescadores, peões e ribeirinhos que guardam o bioma há gerações.',fx:{culture:5,biodiversity:1,water:1},img:true,big:true,bigScale:3.5},
 
-  boi:{n:"Boi Pantaneiro",e:"🐄",cat:'compravel',cs:"#EDE0D0",cost:8,bio:"Criação de baixo impacto.",fx:{culture:3,nitrogen:2},img:true},
-  horta:{n:"Horta",e:"🥬",cat:'compravel',cs:"#3A7A1A",cost:6,bio:"Agroecologia.",fx:{culture:4,nitrogen:3},img:true},
-  bananal:{n:"Bananal",e:"🍌",cat:'compravel',cs:"#4A9A1A",cost:10,bio:"Plantio.",fx:{carbon:3,biodiversity:2,culture:2},img:true},
-  mandioca:{n:"Mandiocal",e:"🌿",cat:'compravel',cs:"#7B6914",cost:7,bio:"Base alimentar.",fx:{culture:3,nitrogen:2,carbon:1},img:true},
-  poco:{n:"Poço d’água",e:"🪣",cat:'compravel',cs:"#1565C0",cost:5,bio:"Água.",fx:{water:4,culture:2},img:true}
+  boi:{n:"Boi Pantaneiro",e:"🐄",cat:'loja',cs:"#EDE0D0",cost:8,bio:"Criação de baixo impacto.",fx:{culture:3,nitrogen:2},img:true},
+  horta:{n:"Horta",e:"🥬",cat:'loja',cs:"#3A7A1A",cost:6,bio:"Agroecologia.",fx:{culture:4,nitrogen:3},img:true},
+  bananal:{n:"Bananal",e:"🍌",cat:'loja',cs:"#4A9A1A",cost:10,bio:"Plantio.",fx:{carbon:3,biodiversity:2,culture:2},img:true},
+  mandioca:{n:"Mandiocal",e:"🌿",cat:'loja',cs:"#7B6914",cost:7,bio:"Base alimentar.",fx:{culture:3,nitrogen:2,carbon:1},img:true},
+  poco:{n:"Poço d’água",e:"🪣",cat:'loja',cs:"#1565C0",cost:5,bio:"Água.",fx:{water:4,culture:2},img:true}
 };
 
 const CATS=[
