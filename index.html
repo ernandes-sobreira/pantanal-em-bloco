@@ -177,7 +177,7 @@ const HINTS=[
 
 // ─── THREE.JS ───
 const cv=document.getElementById('c');
-const ren=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+const ren=new THREE.WebGLRenderer({preserveDrawingBuffer:true,canvas:cv,antialias:true});
 ren.setSize(window.innerWidth,window.innerHeight);
 ren.setPixelRatio(Math.min(devicePixelRatio,2));
 ren.shadowMap.enabled=true;ren.shadowMap.type=THREE.PCFSoftShadowMap;
