@@ -9,91 +9,89 @@
   :root{--ink:#16281c;--soft:#5d7363;--line:#dde9df;--main:#15803d;--deep:#166534;--dark:#14532d;--err:#dc2626;--ok:#16a34a}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--ink);background:#fff;min-height:100vh;
-    display:flex;flex-direction:column;align-items:center;padding:12px 14px 40px;-webkit-tap-highlight-color:transparent}
-  .top{width:100%;max-width:1040px;display:flex;justify-content:space-between;align-items:center}
-  .hub{display:inline-flex;align-items:center;gap:6px;color:var(--deep);text-decoration:none;font-weight:600;font-size:.88rem;padding:6px 12px;border-radius:20px;border:1.5px solid var(--line)}
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 36px;-webkit-tap-highlight-color:transparent}
+  .top{width:100%;max-width:900px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .hub{display:inline-flex;align-items:center;gap:6px;color:var(--deep);text-decoration:none;font-weight:600;font-size:.86rem;padding:6px 12px;border-radius:20px;border:1.5px solid var(--line)}
   .hub svg{width:14px;height:14px}
-  h1{font-size:clamp(1.4rem,5vw,2.1rem);font-weight:900;color:var(--dark);text-align:center;margin-top:6px}
-  .sub{color:var(--soft);font-size:.95rem;text-align:center;margin:2px 0 8px}
-  .hud{display:flex;gap:7px;justify-content:center;margin:4px 0 10px;flex-wrap:wrap;font-size:.88rem}
-  .hud span{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:30px;color:#fff;font-weight:600}
-  .hud b{font-size:1.02rem;font-weight:800}
-  .hud .h1{background:#16a34a}.hud .h2{background:var(--main)}.hud .h3{background:var(--deep)}.hud .h4{background:#b91c1c}
-  .wrap{width:min(1040px,100%);display:grid;grid-template-columns:1fr 280px;gap:12px}
-  @media(max-width:860px){.wrap{grid-template-columns:1fr}}
-  .wrap>*{min-width:0}
-  .card{background:#fff;border:3px solid var(--main);border-radius:22px;padding:8px;box-shadow:0 12px 30px rgba(21,128,61,.14);position:relative}
-  .cw{position:relative;border-radius:14px;overflow:hidden;background:#eef8ff}
+  .tb{display:flex;gap:6px}
+  .tb button{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 11px;font:inherit;font-size:.84rem;font-weight:600;color:var(--deep);cursor:pointer}
+  h1{font-size:clamp(1.4rem,5vw,2rem);font-weight:900;color:var(--dark);text-align:center;margin:4px 0 8px}
+  .card{width:min(900px,100%);background:#fff;border:3px solid var(--main);border-radius:22px;padding:8px;box-shadow:0 12px 30px rgba(21,128,61,.14)}
+  .bar{display:flex;align-items:center;gap:8px;padding:4px 6px 8px;flex-wrap:wrap}
+  .mt{font-weight:900;color:var(--dark);font-size:1rem;margin-right:auto}
+  .pill{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:20px;padding:3px 10px;font-weight:800;font-size:.85rem;color:var(--deep)}
+  .pill.e{background:#fef2f2;border-color:#fecaca;color:var(--err)}
+  .goals{display:flex;gap:6px;flex-wrap:wrap;padding:0 6px 8px}
+  .g{display:flex;align-items:center;gap:4px;border:2px solid var(--line);border-radius:14px;padding:3px 8px 3px 4px;font-weight:800;font-size:.85rem;background:#fff;transition:.2s}
+  .g img{height:26px;width:30px;object-fit:contain}
+  .g.done{border-color:#86efac;background:#dcfce7;color:var(--ok)}
+  .cw{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(#e6f5ff,#f6fbff)}
   #cv{display:block;width:100%;aspect-ratio:16/10;touch-action:none;cursor:pointer}
+  @media(max-width:600px){#cv{aspect-ratio:1/1}}
   .zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:6px}
   .zoom button{width:36px;height:36px;border-radius:10px;border:2px solid var(--line);background:#fff;font-size:1.2rem;font-weight:800;color:var(--deep);cursor:pointer}
-  .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:16px;background:rgba(255,255,255,.97);overflow:auto;z-index:5}
+  .toast{position:absolute;left:50%;bottom:10px;transform:translate(-50%,20px);opacity:0;transition:.25s;background:#fff;border:2.5px solid var(--main);border-radius:16px;
+    padding:8px 14px;max-width:min(92%,520px);font-size:.92rem;line-height:1.35;box-shadow:0 8px 22px rgba(0,0,0,.14);pointer-events:none;text-align:center}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .toast.err{border-color:var(--err)}
+  .toast b{display:block;font-size:1rem}
+  .toast.err b{color:var(--err)} .toast.ok b{color:var(--ok)}
+  .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;background:rgba(255,255,255,.96);overflow:auto;z-index:5}
   .ov[hidden]{display:none}
-  .ov h2{font-size:clamp(1.15rem,4vw,1.6rem);color:var(--dark);font-weight:900}
-  .ov p{font-size:.95rem;line-height:1.45;max-width:600px}
+  .ov h2{font-size:clamp(1.2rem,4.5vw,1.7rem);color:var(--dark);font-weight:900}
+  .ov p{font-size:.95rem;line-height:1.45;max-width:520px}
   .ov .small{font-size:.8rem;color:var(--soft)}
-  .info{max-width:600px;background:#f0fdf4;border:2px solid #bbf7d0;border-radius:14px;padding:10px 14px;text-align:left;font-size:.9rem;line-height:1.5}
-  .btn{background:var(--main);color:#fff;border:0;padding:11px 22px;border-radius:12px;font-weight:800;cursor:pointer;font-size:1rem;font-family:inherit}
+  .big{font-size:3rem;line-height:1}
+  .stars{font-size:2.2rem;letter-spacing:4px}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:520px;width:100%}
+  .how div{border:2px solid var(--line);border-radius:14px;padding:8px;font-size:.82rem;font-weight:600;line-height:1.3}
+  .how span{display:block;font-size:1.6rem}
+  .btn{background:var(--main);color:#fff;border:0;padding:12px 24px;border-radius:14px;font-weight:800;cursor:pointer;font-size:1.02rem;font-family:inherit}
   .btn.ghost{background:#fff;color:var(--deep);border:2px solid var(--line)}
   .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-  .pal{display:flex;gap:6px;overflow-x:auto;padding:8px 2px 2px;scrollbar-width:thin}
-  .pc{flex:0 0 auto;width:84px;border:2.5px solid var(--line);border-radius:14px;background:#fff;padding:5px 4px;cursor:pointer;font:inherit;text-align:center;position:relative}
-  .pc img{height:44px;max-width:72px;object-fit:contain;display:block;margin:0 auto}
+  .pal{display:flex;gap:6px;overflow-x:auto;padding:8px 2px 4px;scrollbar-width:thin}
+  .pc{flex:0 0 auto;width:82px;border:2.5px solid var(--line);border-radius:16px;background:#fff;padding:5px 4px;cursor:pointer;font:inherit;text-align:center;position:relative;transition:.15s}
+  .pc img{height:44px;max-width:70px;object-fit:contain;display:block;margin:0 auto}
+  .pc .ic{font-size:2rem;display:block;height:44px;line-height:44px}
   .pc .n{font-size:.72rem;font-weight:700;line-height:1.1;margin-top:2px;display:block}
-  .pc .q{position:absolute;top:3px;right:4px;background:var(--main);color:#fff;border-radius:10px;font-size:.7rem;font-weight:800;padding:0 6px}
-  .pc.on{border-color:var(--main);background:#f0fdf4;transform:translateY(-2px)}
-  .pc:disabled{opacity:.35}
+  .pc .q{position:absolute;top:3px;right:4px;background:var(--main);color:#fff;border-radius:10px;font-size:.72rem;font-weight:800;padding:0 6px}
+  .pc.on{border-color:var(--main);background:#f0fdf4;transform:translateY(-3px);box-shadow:0 6px 14px rgba(21,128,61,.2)}
+  .pc:disabled{opacity:.3}
   .pc.tool{border-style:dashed}
-  .side .box{border:2px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px}
-  .side h3{font-size:.95rem;color:var(--dark);margin-bottom:6px}
-  .obj{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;padding:5px 0;border-bottom:1px dashed var(--line)}
-  .obj:last-child{border-bottom:0}
-  .obj b{font-weight:800}
-  .obj.done{color:var(--ok)}
-  .msg{font-size:.9rem;line-height:1.45;min-height:64px}
-  .msg.err{color:var(--err)}
-  .msg .t{font-weight:800;display:block;margin-bottom:2px}
-  .rule{font-size:.82rem;color:var(--soft);margin-top:6px;line-height:1.4}
-  .keys{font-size:.8rem;color:var(--soft);text-align:center;margin-top:6px}
+  .where{display:flex;align-items:center;gap:8px;padding:4px 6px 2px;font-size:.9rem;font-weight:600;color:var(--soft);min-height:30px}
+  .where b{color:var(--deep)}
   .savebox{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
   .savebox input{padding:10px 12px;border-radius:10px;border:2px solid var(--line);font-size:1rem;width:190px;font-family:inherit}
-  .ranking{margin-top:16px;width:min(1040px,100%);border:3px solid var(--main);border-radius:18px;padding:0 16px 12px;overflow:hidden}
+  .ranking{margin-top:16px;width:min(900px,100%);border:3px solid var(--main);border-radius:18px;padding:0 16px 12px;overflow:hidden}
   .ranking h3{font-size:1.02rem;margin:0 -16px 8px;padding:10px 16px;background:var(--main);color:#fff}
   .ranking ol{list-style:none}
   .ranking li{display:flex;justify-content:space-between;gap:10px;padding:7px 4px;border-bottom:1px solid var(--line);font-size:.92rem}
   .ranking li:last-child{border-bottom:0}
   .ranking .pos{display:inline-block;min-width:2.1em;font-weight:800;color:var(--deep)}
   .note{font-size:.8rem;color:var(--soft);margin-top:6px}
-  footer{margin-top:22px;font-size:.8rem;color:var(--soft);text-align:center;line-height:1.6}
+  .confete{position:fixed;top:-30px;font-size:1.6rem;pointer-events:none;z-index:50;animation:cai linear forwards}
+  @keyframes cai{to{transform:translateY(110vh) rotate(540deg)}}
+  footer{margin-top:20px;font-size:.8rem;color:var(--soft);text-align:center;line-height:1.6}
   footer .credit{font-weight:700;color:var(--ink)}
-  @media(max-width:600px){body{padding:8px 8px 30px}.sub{display:none}.hud span{padding:4px 8px;font-size:.76rem}.hud b{font-size:.9rem}
-    .ov{position:fixed;inset:auto 10px;top:50%;transform:translateY(-50%);max-height:86vh;border:3px solid var(--main);border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.25);z-index:30;justify-content:flex-start}}
+  @media(max-width:600px){body{padding:6px 6px 30px}.card{padding:5px}
+    .ov{position:fixed;inset:auto 10px;top:50%;transform:translateY(-50%);max-height:88vh;border:3px solid var(--main);border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.25);z-index:30;justify-content:flex-start}}
 </style>
 </head>
 <body>
-<div class="top"><a class="hub" href="https://ernandes-sobreira.github.io/jogos-ambientais/"><svg viewBox="0 0 16 16"><path d="M10 2 4 8l6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Todos os jogos</a></div>
+<div class="top"><a class="hub" href="https://ernandes-sobreira.github.io/jogos-ambientais/"><svg viewBox="0 0 16 16"><path d="M10 2 4 8l6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Todos os jogos</a>
+  <div class="tb"><button id="bSom" type="button">🔊</button><button id="bRe" type="button">↺ Recomeçar</button></div></div>
 <h1>🧱 Pantanal em Bloco</h1>
-<p class="sub">Monte o Pantanal peça por peça. Cada bicho e cada planta só vive no lugar certo.</p>
-<div class="hud">
-  <span class="h1">Pontos <b id="hP">0</b></span>
-  <span class="h2">Missão <b id="hM">1/5</b></span>
-  <span class="h3">Metas <b id="hO">0/0</b></span>
-  <span class="h4">Erros <b id="hE">0</b></span>
-</div>
-<div class="wrap">
-  <div class="card">
-    <div class="cw">
-      <canvas id="cv"></canvas>
-      <div class="zoom"><button id="zi" aria-label="Aproximar">+</button><button id="zo" aria-label="Afastar">−</button></div>
-      <div class="ov" id="ov"><h2>Carregando...</h2></div>
-    </div>
-    <div class="pal" id="pal"></div>
-    <p class="keys">Escolha uma peça e toque no tabuleiro. Arraste para girar a vista.</p>
+<div class="card">
+  <div class="bar"><span class="mt" id="mT">Missão 1</span><span class="pill" id="hP">⭐ 0</span><span class="pill e" id="hE">✖ 0</span></div>
+  <div class="goals" id="goals"></div>
+  <div class="cw">
+    <canvas id="cv"></canvas>
+    <div class="zoom"><button id="zi" aria-label="Aproximar">+</button><button id="zo" aria-label="Afastar">−</button></div>
+    <div class="toast" id="toast"></div>
+    <div class="ov" id="ov"><h2>Carregando...</h2></div>
   </div>
-  <div class="side">
-    <div class="box"><h3 id="mT">Metas</h3><div id="objs"></div></div>
-    <div class="box"><div class="msg" id="msg">Escolha uma peça embaixo do tabuleiro.</div><div class="rule" id="rule"></div></div>
-  </div>
+  <div class="where" id="where"></div>
+  <div class="pal" id="pal"></div>
 </div>
 <div class="ranking"><h3>Ranking Global</h3><ol id="rankList"><li><span>Carregando o ranking...</span></li></ol><p class="note" id="rankNote"></p></div>
 <footer>Pantanal em Bloco · jogo de construção com regras ecológicas<br><span class="credit">Idealizado por Ernandes Sobreira</span> · UNEMAT · LEFA · LIPAN · CELBE</footer>
@@ -103,7 +101,6 @@
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const N=8;
-
 /* ───────── PEÇAS ───────── */
 /* onde: 'agua' só na água; 'terra' só em terra. regra(x,z) devolve '' se pode, ou o motivo do erro */
 const P={
@@ -179,32 +176,44 @@ const M=[
 ];
 
 /* ───────── ESTADO ───────── */
-let mi=0,pts=0,ptsM=0,erros=0,errosM=0,sel=null,mode='inicio',salvo=false,G=[],est={};
+let mi=0,pts=0,ptsM=0,erros=0,errosM=0,sel=null,mode='inicio',salvo=false,G=[],est={},som=true,estrelas=[];
 const cel=(x,z)=>(x>=0&&z>=0&&x<N&&z<N)?G[z*N+x]:null;
 const dist=(a,b,c,d)=>Math.max(Math.abs(a-c),Math.abs(b-d));
 function viz(x,z,r){const o=[];for(let dz=-r;dz<=r;dz++)for(let dx=-r;dx<=r;dx++){if(!dx&&!dz)continue;const c=cel(x+dx,z+dz);if(c)o.push(c);}return o;}
 const todos=()=>G.filter(c=>c.p);
+const ONDE={baia:'encostada no rio 🌊',mata:'encostada na água 🌊',caranda:'até 2 casas da água',piuva:'qualquer terra',manduvi:'qualquer terra',
+  aguape:'em cima da água 🌊',jacare:'na beira da água 🌊',capivara:'na beira da água 🌊',tuiuiu:'na beira da água 🌊',arara:'ao lado de um manduvi 🌳 (2 por árvore)',
+  onca:'3 matas 🌳 + 1 presa 🦫 por perto, longe de outra onça',boi:'longe da água (margem protegida)',cavalo:'longe da água (margem protegida)',
+  comunidade:'na beira da água 🌊',pousada:'na beira da água 🌊',pesquisa:'na beira da água 🌊',aldeia:'qualquer terra'};
+
+/* ───────── SOM ───────── */
+let AC=null;
+function bip(f,d=.12,t='sine',v=.08){if(!som)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=t;o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(AC.destination);const n=AC.currentTime;g.gain.exponentialRampToValueAtTime(.0001,n+d);o.start(n);o.stop(n+d);}catch(_){}}
+const somOk=()=>{bip(660);setTimeout(()=>bip(880),90);}, somErro=()=>bip(180,.25,'square',.05), somFim=()=>[523,659,784,1046].forEach((f,i)=>setTimeout(()=>bip(f,.18),i*120));
+$('bSom').onclick=()=>{som=!som;$('bSom').textContent=som?'🔊':'🔇';};
 
 /* ───────── 3D ───────── */
 const cv=$('cv');
-const ren=new THREE.WebGLRenderer({canvas:cv,antialias:true,preserveDrawingBuffer:true});
-ren.setPixelRatio(Math.min(devicePixelRatio,2));
-const sc=new THREE.Scene();sc.background=new THREE.Color(0xeef8ff);
-const cam=new THREE.PerspectiveCamera(45,16/10,.1,200);
-sc.add(new THREE.AmbientLight(0xffffff,.75));
-const sun=new THREE.DirectionalLight(0xffffff,.65);sun.position.set(6,14,8);sc.add(sun);
-const base=new THREE.Mesh(new THREE.BoxGeometry(N+.6,.5,N+.6),new THREE.MeshLambertMaterial({color:0xc9a66b}));
-base.position.set(0,-.36,0);sc.add(base);
-let th=.75,ph=.9,rad=11.5;
-function camUp(){cam.position.set(rad*Math.sin(ph)*Math.sin(th),rad*Math.cos(ph),rad*Math.sin(ph)*Math.cos(th));cam.lookAt(0,0,0);}
-function resize(){const w=cv.clientWidth,h=cv.clientHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+const ren=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,preserveDrawingBuffer:true});
+ren.setPixelRatio(Math.min(devicePixelRatio,2));ren.setClearColor(0x000000,0);
+const sc=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(42,16/10,.1,200);
+sc.add(new THREE.AmbientLight(0xffffff,.78));
+const sun=new THREE.DirectionalLight(0xffffff,.6);sun.position.set(6,14,8);sc.add(sun);
+const base=new THREE.Mesh(new THREE.BoxGeometry(N+.5,.6,N+.5),new THREE.MeshLambertMaterial({color:0xd6b47a}));base.position.y=-.42;sc.add(base);
+let th=.6,ph=.78,rad=11;
+function camUp(){cam.position.set(rad*Math.sin(ph)*Math.sin(th),rad*Math.cos(ph),rad*Math.sin(ph)*Math.cos(th));cam.lookAt(0,-.3,0);}
+function resize(){const w=cv.clientWidth,h=cv.clientHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();rad=Math.max(rad,w/h<1.1?13:10.5);camUp();}
 addEventListener('resize',resize);
 const TEX={};const loader=new THREE.TextureLoader();
 function tex(n){if(!TEX[n])TEX[n]=loader.load('assets/'+n+'.webp');return TEX[n];}
-const matT=new THREE.MeshLambertMaterial({color:0xbfe3a0}),matT2=new THREE.MeshLambertMaterial({color:0xb2da92}),matA=new THREE.MeshLambertMaterial({color:0x6cc0e8});
-const tiles=[];
-const hl=new THREE.Mesh(new THREE.BoxGeometry(1,.06,1),new THREE.MeshBasicMaterial({color:0x22c55e,transparent:true,opacity:.55}));hl.visible=false;sc.add(hl);
+const matT=new THREE.MeshLambertMaterial({color:0xc4e6a2}),matT2=new THREE.MeshLambertMaterial({color:0xb5dd8f}),matA=new THREE.MeshLambertMaterial({color:0x5fb8e6});
+const tiles=[],marks=[];
+const geoMark=new THREE.CircleGeometry(.3,24);
+const matMark=new THREE.MeshBasicMaterial({color:0x22c55e,transparent:true,opacity:.55,depthWrite:false});
+const hl=new THREE.Mesh(new THREE.BoxGeometry(1.02,.07,1.02),new THREE.MeshBasicMaterial({color:0x22c55e,transparent:true,opacity:.5}));hl.visible=false;sc.add(hl);
 const pos=(x,z)=>[x-N/2+.5,z-N/2+.5];
+const topo=c=>c.agua?.03:.15;
 
 function montar(){
   tiles.forEach(t=>sc.remove(t));tiles.length=0;
@@ -212,115 +221,130 @@ function montar(){
   G=[];for(let z=0;z<N;z++)for(let x=0;x<N;x++)G.push({x,z,agua:false,p:null,spr:null});
   M[mi].rio.forEach(([x,z])=>cel(x,z).agua=true);
   G.forEach(c=>{const[px,pz]=pos(c.x,c.z);
-    const m=new THREE.Mesh(new THREE.BoxGeometry(.98,c.agua?.18:.3,.98),c.agua?matA:((c.x+c.z)%2?matT:matT2));
-    m.position.set(px,c.agua?-.06:0,pz);m.userData=c;c.tile=m;sc.add(m);tiles.push(m);});
+    const m=new THREE.Mesh(new THREE.BoxGeometry(.97,c.agua?.18:.3,.97),c.agua?matA:((c.x+c.z)%2?matT:matT2));
+    m.position.set(px,c.agua?-.06:0,pz);m.userData=c;c.tile=m;sc.add(m);tiles.push(m);
+    const mk=new THREE.Mesh(geoMark,matMark);mk.rotation.x=-Math.PI/2;mk.position.set(px,topo(c)+.01,pz);mk.visible=false;sc.add(mk);c.mk=mk;marks.push(mk);});
 }
-function virarAgua(c){c.agua=true;c.tile.geometry.dispose();c.tile.geometry=new THREE.BoxGeometry(.98,.18,.98);c.tile.material=matA;c.tile.position.y=-.06;}
+function virarAgua(c){c.agua=true;c.tile.geometry.dispose();c.tile.geometry=new THREE.BoxGeometry(.97,.18,.97);c.tile.material=matA;c.tile.position.y=-.06;c.mk.position.y=topo(c)+.01;}
+const BICHO=['jacare','capivara','tuiuiu','arara','onca','boi','cavalo'];
 function sprite(c,k){const p=P[k];const m=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(p.img),transparent:true}));
-  const[px,pz]=pos(c.x,c.z);const h=p.h||1;m.scale.set(h,h,h);m.position.set(px,(c.agua?.05:.15)+h/2,pz);sc.add(m);c.spr=m;
-  m.scale.set(.01,.01,.01);const t0=performance.now();(function a(){const q=Math.min(1,(performance.now()-t0)/220);const s=h*(q<1?q*1.1:1);m.scale.set(s,s,s);if(q<1)requestAnimationFrame(a);})();}
+  const[px,pz]=pos(c.x,c.z);const h=(p.h||1)*.85;m.userData={h,y:topo(c)+h/2,bicho:BICHO.includes(k),fase:Math.random()*6};
+  m.position.set(px,m.userData.y,pz);sc.add(m);c.spr=m;
+  m.scale.set(.01,.01,.01);const t0=performance.now();(function a(){const q=Math.min(1,(performance.now()-t0)/260);const s=h*(q<1?(q<.7?q/.7*1.15:1.15-(q-.7)/.3*.15):1);m.scale.set(s,s,s);if(q<1)requestAnimationFrame(a);})();}
+function marcar(){
+  G.forEach(c=>c.mk.visible=false);
+  if(mode!=='jogo'||!sel||sel==='remover')return;
+  G.forEach(c=>{if(!motivo(c,sel))c.mk.visible=true;});
+}
 
-/* entrada: arrastar gira, toque coloca */
+/* entrada */
 const ray=new THREE.Raycaster(),mv=new THREE.Vector2();
 let drag=null;
 function pick(e){const r=cv.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(mv,cam);const h=ray.intersectObjects(tiles);return h.length?h[0].object.userData:null;}
 cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,moved:0};try{cv.setPointerCapture(e.pointerId);}catch(_){}});
 cv.addEventListener('pointermove',e=>{
-  if(drag){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.moved+=Math.abs(dx)+Math.abs(dy);if(drag.moved>8){th-=dx*.008;ph=Math.max(.35,Math.min(1.35,ph-dy*.006));camUp();}drag.x=e.clientX;drag.y=e.clientY;}
-  hover(pick(e));});
-cv.addEventListener('pointerup',e=>{if(drag&&drag.moved<=8&&mode==='jogo'){const c=pick(e);if(c)colocar(c);}drag=null;});
+  if(drag){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.moved+=Math.abs(dx)+Math.abs(dy);if(drag.moved>10){th-=dx*.008;ph=Math.max(.3,Math.min(1.25,ph-dy*.006));camUp();}drag.x=e.clientX;drag.y=e.clientY;}
+  if(e.pointerType==='mouse')hover(pick(e));});
+cv.addEventListener('pointerup',e=>{if(drag&&drag.moved<=10&&mode==='jogo'){const c=pick(e);if(c)colocar(c);}drag=null;});
 cv.addEventListener('pointerleave',()=>{hl.visible=false;});
-cv.addEventListener('wheel',e=>{e.preventDefault();rad=Math.max(8,Math.min(24,rad+e.deltaY*.01));camUp();},{passive:false});
-$('zi').onclick=()=>{rad=Math.max(8,rad-2);camUp();};$('zo').onclick=()=>{rad=Math.min(24,rad+2);camUp();};
+cv.addEventListener('wheel',e=>{e.preventDefault();rad=Math.max(7,Math.min(22,rad+e.deltaY*.01));camUp();},{passive:false});
+$('zi').onclick=()=>{rad=Math.max(7,rad-1.5);camUp();};$('zo').onclick=()=>{rad=Math.min(22,rad+1.5);camUp();};
 
 function motivo(c,k){
   const p=P[k];
   if(k==='remover')return c.p?'':'Não há peça aqui.';
   if(c.p)return 'Já tem uma peça nesta casa.';
   if(p.onde==='agua'&&!c.agua)return p.n+' só vive na água.';
-  if(p.onde==='terra'&&c.agua)return p.n+' não vai na água. Escolha uma casa de terra.';
+  if(p.onde==='terra'&&c.agua)return p.n+' não vai na água.';
   return p.regra(c.x,c.z);
 }
 function hover(c){
   if(!c||!sel||mode!=='jogo'){hl.visible=false;return;}
-  const[px,pz]=pos(c.x,c.z);hl.position.set(px,c.agua?.06:.18,pz);hl.visible=true;
-  hl.material.color.set(motivo(c,sel)?0xef4444:0x22c55e);
+  const[px,pz]=pos(c.x,c.z);hl.position.set(px,topo(c)+.02,pz);hl.visible=true;
+  hl.material.color.set(sel==='remover'?(c.p?0xf59e0b:0x94a3b8):(motivo(c,sel)?0xef4444:0x22c55e));
 }
 
-/* ───────── REGRAS DO JOGO ───────── */
+/* ───────── REGRAS ───────── */
 function colocar(c){
-  if(!sel)return aviso('Escolha uma peça primeiro.','',false);
+  if(!sel)return toast('Escolha uma peça embaixo','',false);
   if(sel==='remover'){
     if(!c.p)return;
-    const k=c.p;sc.remove(c.spr);c.spr=null;c.p=null;est[k]++;ptsM-=5;pts-=5;
-    aviso('Peça removida  −5','Você pode colocar de novo em outro lugar.',false);return atualizar();
+    const k=c.p;sc.remove(c.spr);c.spr=null;c.p=null;est[k]++;ptsM-=5;pts-=5;bip(300);
+    toast('Peça devolvida  −5',P[k].n+' voltou para a sua mão.',false);sel=k;return atualizar();
   }
-  if(!est[sel])return aviso('Acabaram as peças de '+P[sel].n+'.','',true);
+  if(!est[sel])return;
   const m=motivo(c,sel);
-  if(m){erros++;errosM++;pts-=15;ptsM-=15;aviso('Lugar errado  −15',m,true);return atualizar();}
+  if(m){erros++;errosM++;pts-=15;ptsM-=15;somErro();toast('Ops! −15',m,true);return atualizar();}
   est[sel]--;
-  if(sel==='baia'){virarAgua(c);}
-  else{c.p=sel;sprite(c,sel);}
-  pts+=10;ptsM+=10;
-  aviso(P[sel].n+'  +10',P[sel].fato,false);
+  if(sel==='baia')virarAgua(c);else{c.p=sel;sprite(c,sel);}
+  pts+=10;ptsM+=10;somOk();
+  toast(P[sel].n+'  +10',P[sel].fato,false,true);
   if(!est[sel]){const nx=Object.keys(est).find(k=>est[k]>0);sel=nx||null;}
   atualizar();
 }
 function contar(k){return k==='baia'?M[mi].est.baia-est.baia:G.filter(c=>c.p===k).length;}
+function icone(k){return P[k].img?`<img src="assets/${P[k].img}.webp" alt="">`:'<span class="ic">🌊</span>';}
 function atualizar(){
   const m=M[mi],ks=Object.keys(m.est);
   const feitas=ks.filter(k=>contar(k)>=m.est[k]).length;
-  $('hP').textContent=pts;$('hM').textContent=(mi+1)+'/'+M.length;$('hO').textContent=feitas+'/'+ks.length;$('hE').textContent=erros;
-  $('mT').textContent='Missão '+(mi+1)+': '+m.n;
-  $('objs').innerHTML=ks.map(k=>`<div class="obj ${contar(k)>=m.est[k]?'done':''}"><span>${contar(k)>=m.est[k]?'✅':'⬜'} ${esc(P[k].n)}</span><b>${contar(k)}/${m.est[k]}</b></div>`).join('');
-  pal();
-  if(feitas===ks.length&&mode==='jogo')setTimeout(fimMissao,500);
+  $('mT').textContent=`Missão ${mi+1}/${M.length} · ${m.n}`;$('hP').textContent='⭐ '+pts;$('hE').textContent='✖ '+erros;
+  $('goals').innerHTML=ks.map(k=>`<span class="g ${contar(k)>=m.est[k]?'done':''}" title="${esc(P[k].n)}">${P[k].img?`<img src="assets/${P[k].img}.webp" alt="">`:'🌊'}${contar(k)}/${m.est[k]}${contar(k)>=m.est[k]?' ✓':''}</span>`).join('');
+  $('pal').innerHTML=ks.map(k=>`<button class="pc ${sel===k?'on':''}" data-k="${k}" ${est[k]?'':'disabled'}>${icone(k)}<span class="n">${esc(P[k].n)}</span><span class="q">${est[k]}</span></button>`).join('')
+    +`<button class="pc tool ${sel==='remover'?'on':''}" data-k="remover"><span class="ic">✋</span><span class="n">Devolver</span></button>`;
+  $('pal').querySelectorAll('.pc').forEach(b=>b.onclick=()=>{sel=b.dataset.k;bip(520,.06);atualizar();});
+  $('where').innerHTML=!sel?'':sel==='remover'?'✋ Toque numa peça para devolver à sua mão (−5).':`📍 <b>${esc(P[sel].n)}</b>: ${ONDE[sel]}`;
+  marcar();
+  if(mode==='jogo'&&sel&&sel!=='remover'&&est[sel]&&!G.some(c=>!motivo(c,sel)))
+    toast('Ainda não há lugar para '+P[sel].n,'Veja a regra 📍 acima do tabuleiro, ou devolva peças com ✋.',true);
+  if(feitas===ks.length&&mode==='jogo'){mode='trans';setTimeout(fimMissao,600);}
 }
-function pal(){
-  const ks=Object.keys(M[mi].est);
-  $('pal').innerHTML=ks.map(k=>`<button class="pc ${sel===k?'on':''}" data-k="${k}" ${est[k]?'':'disabled'}>${P[k].img?`<img src="assets/${P[k].img}.webp" alt="">`:'<span style="font-size:2rem;display:block;height:44px;line-height:44px">🌊</span>'}<span class="n">${esc(P[k].n)}</span><span class="q">${est[k]}</span></button>`).join('')
-    +`<button class="pc tool ${sel==='remover'?'on':''}" data-k="remover"><span style="font-size:2rem;display:block;height:44px;line-height:44px">✋</span><span class="n">Remover</span></button>`;
-  $('pal').querySelectorAll('.pc').forEach(b=>b.onclick=()=>{sel=b.dataset.k;pal();
-    if(sel!=='remover'){$('msg').className='msg';$('msg').innerHTML=`<span class="t">${esc(P[sel].n)}</span>${esc(P[sel].fato)}`;$('rule').textContent=regraTexto(sel);}
-    else{$('msg').className='msg';$('msg').innerHTML='<span class="t">Remover</span>Toque numa peça para tirar. Custa 5 pontos.';$('rule').textContent='';}});
-}
-function regraTexto(k){const t={baia:'Onde: encostada na água.',mata:'Onde: encostada na água.',caranda:'Onde: até 2 casas da água.',piuva:'Onde: qualquer casa de terra.',manduvi:'Onde: qualquer casa de terra.',
-  aguape:'Onde: na água.',jacare:'Onde: terra encostada na água.',capivara:'Onde: terra encostada na água.',tuiuiu:'Onde: terra encostada na água.',arara:'Onde: ao lado de um manduvi (2 araras por manduvi).',
-  onca:'Onde: 3 matas e uma presa a até 2 casas. 4 casas entre onças.',boi:'Onde: longe da água (margem é APP).',cavalo:'Onde: longe da água (margem é APP).',comunidade:'Onde: encostada na água.',pousada:'Onde: encostada na água.',pesquisa:'Onde: encostada na água.',aldeia:'Onde: qualquer casa de terra.'};return t[k]||'';}
-function aviso(t,d,err){$('msg').className='msg'+(err?' err':'');$('msg').innerHTML=`<span class="t">${esc(t)}</span>${esc(d)}`;}
+let tT=null;
+function toast(t,d,err,ok){const el=$('toast');el.className='toast on'+(err?' err':ok?' ok':'');el.innerHTML=`<b>${esc(t)}</b>${esc(d)}`;clearTimeout(tT);tT=setTimeout(()=>el.classList.remove('on'),err?4200:3200);}
+function confete(){const e=['🌿','🐟','🦜','💧','🌸','⭐'];for(let i=0;i<28;i++){const s=document.createElement('span');s.className='confete';s.textContent=e[i%e.length];
+  s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.8+Math.random()*1.6)+'s';s.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),4200);}}
 
 /* ───────── TELAS ───────── */
 function ov(h){$('ov').innerHTML=h;$('ov').hidden=false;}
+function apresentar(){
+  const m=M[mi];mode='intro';montar();est={...m.est};sel=null;atualizar();
+  ov(`<div class="big">${['🌊','🪷','🦜','🐆','🏡'][mi]}</div><h2>Missão ${mi+1}: ${esc(m.n)}</h2><p>${esc(m.info)}</p>
+    <div class="row">${Object.keys(m.est).map(k=>`<span class="g">${P[k].img?`<img src="assets/${P[k].img}.webp" alt="">`:'🌊'}× ${m.est[k]}</span>`).join('')}</div>
+    <div class="row"><button class="btn" id="bG">Jogar</button></div>`);
+  $('bG').onclick=iniciarMissao;
+}
 function iniciarMissao(){
   const m=M[mi];est={...m.est};ptsM=0;errosM=0;sel=Object.keys(est)[0];mode='jogo';
-  montar();$('ov').hidden=true;$('rule').textContent=regraTexto(sel);aviso('Missão '+(mi+1)+': '+m.n,m.info,false);atualizar();
+  montar();$('ov').hidden=true;atualizar();toast('Os círculos verdes mostram onde pode','Toque num deles para colocar a peça.',false);
 }
 function fimMissao(){
-  if(mode!=='jogo')return;mode='fim';
-  const bonus=Math.max(0,50-errosM*10);pts+=bonus;
-  if(mi===M.length-1){telaFinal(true);return;}
-  ov(`<h2>Missão ${mi+1} completa!</h2><p>Pontos na missão: <b>${ptsM}</b> · Erros: <b>${errosM}</b> · Bônus: <b>+${bonus}</b> (50 menos 10 por erro)</p>
-    <div class="info"><b>Próxima: ${esc(M[mi+1].n)}.</b> ${esc(M[mi+1].info)}</div><div class="row"><button class="btn" id="bN">Começar missão ${mi+2}</button></div>`);
-  $('bN').onclick=()=>{mi++;iniciarMissao();};atualizar();
+  if(mode!=='trans')return;mode='fim';
+  const st=errosM===0?3:errosM<=2?2:1;estrelas[mi]=st;
+  const bonus=Math.max(0,50-errosM*10);pts+=bonus;somFim();confete();atualizar();
+  if(mi===M.length-1){setTimeout(()=>telaFinal(true),700);return;}
+  ov(`<div class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><h2>Missão ${mi+1} completa!</h2>
+    <p>Erros: <b>${errosM}</b> · Bônus: <b>+${bonus}</b></p><p class="small">3 estrelas = nenhum erro.</p>
+    <div class="row"><button class="btn ghost" id="bV">Ver meu Pantanal</button><button class="btn" id="bN">Próxima missão ▸</button></div>`);
+  $('bN').onclick=()=>{mi++;apresentar();};$('bV').onclick=()=>{$('ov').hidden=true;setTimeout(()=>{if(mode==='fim')fimMissaoVolta();},6000);};
 }
+function fimMissaoVolta(){ov(`<h2>Pronto para a próxima?</h2><div class="row"><button class="btn" id="bN">Missão ${mi+2} ▸</button></div>`);$('bN').onclick=()=>{mi++;apresentar();};}
 function telaFinal(ok){
-  mode='fim';salvo=false;atualizar();
-  ov(`<h2>${ok?'Seu Pantanal está completo!':'Fim de jogo'}</h2><p>Pontuação final: <b>${pts}</b> · Erros: <b>${erros}</b></p>
+  mode='final';salvo=false;
+  const tot=estrelas.reduce((a,b)=>a+(b||0),0);
+  ov(`<div class="big">🏆</div><h2>${ok?'Seu Pantanal está completo!':'Fim de jogo'}</h2>
+    <p>Pontuação: <b>${pts}</b> · Estrelas: <b>${tot}/15</b> · Erros: <b>${erros}</b></p>
     <div class="savebox"><input id="pName" maxlength="20" placeholder="Seu nome"><button class="btn" id="bS">Salvar no ranking</button></div><p class="small" id="sSt"></p>
     <div class="row"><button class="btn ghost" id="bF">Ver meu Pantanal</button><button class="btn ghost" id="bR">Jogar de novo</button></div>`);
   $('bS').onclick=()=>salvar(ok);$('bR').onclick=inicio;$('bF').onclick=()=>{$('ov').hidden=true;};
 }
+$('bRe').onclick=()=>{if(mode==='jogo'||mode==='fim'||mode==='trans'){apresentar();}};
 function inicio(){
-  mi=0;pts=0;erros=0;mode='inicio';montar();atualizar();
-  ov(`<h2>Monte o Pantanal peça por peça</h2>
-    <div class="info">Cada missão traz um rio e um conjunto de peças. Coloque todas no lugar certo.<br>
-    <b>Lugar certo:</b> +10. <b>Lugar errado:</b> −15, e o jogo explica o porquê. <b>Remover:</b> −5.<br>
-    Ao terminar a missão sem erros você ganha +50 de bônus.</div>
-    <p class="small">A casa fica verde quando a peça pode ir ali e vermelha quando não pode.</p>
-    <div class="row"><button class="btn" id="bI">Começar a missão 1</button></div>`);
-  $('bI').onclick=iniciarMissao;
+  mi=0;pts=0;erros=0;estrelas=[];mode='inicio';montar();est={...M[0].est};atualizar();
+  ov(`<div class="big">🧱🌿</div><h2>Monte o Pantanal peça por peça</h2>
+    <div class="how"><div><span>👆</span>Escolha uma peça</div><div><span>🟢</span>Toque num círculo verde</div><div><span>⭐</span>Complete as metas</div></div>
+    <p class="small">Lugar certo +10 · lugar errado −15 · devolver peça −5 · missão sem erro dá 3 estrelas</p>
+    <div class="row"><button class="btn" id="bI">Começar</button></div>`);
+  $('bI').onclick=apresentar;
 }
-
 /* ───────── RANKING ───────── */
 const firebaseConfig={apiKey:"AIzaSyCbXi3UCVl8oLleBzGb6DqWSxbZmZU2yDQ",authDomain:"jogos-ranking.firebaseapp.com",databaseURL:"https://jogos-ranking-default-rtdb.firebaseio.com",
   projectId:"jogos-ranking",storageBucket:"jogos-ranking.firebasestorage.app",messagingSenderId:"958784915420",appId:"1:958784915420:web:4212d3ad278f02d600f119"};
@@ -337,10 +361,17 @@ async function salvar(ok){if(salvo)return;const nome=$('pName').value.trim(),st=
   $('bS').disabled=true;try{await fs.addDoc(fs.collection(db,'games',GAME_ID,'scores'),{name:nome.slice(0,20),score:pts,level:(ok?'Completo':'Missão '+(mi+1))+' · '+erros+' erro(s)',ts:fs.serverTimestamp()});
   salvo=true;st.textContent='Salvo no Ranking Global!';carregar();}catch(e){$('bS').disabled=false;st.textContent='Erro ao salvar. Tente de novo.';}}
 
+
 resize();camUp();
-(function loop(){requestAnimationFrame(loop);ren.render(sc,cam);})();
+(function loop(t){requestAnimationFrame(loop);
+  const s=(t||0)/1000;
+  G.forEach(c=>{if(c.spr&&c.spr.userData.bicho)c.spr.position.y=c.spr.userData.y+Math.abs(Math.sin(s*2+c.spr.userData.fase))*.06;});
+  matMark.opacity=.35+.25*Math.sin(s*4);
+  matA.color.setHSL(.55,.68,.62+.03*Math.sin(s*1.5));
+  ren.render(sc,cam);})();
 inicio();
-window.__pb={get mode(){return mode},get G(){return G},get est(){return est},get pts(){return pts},get mi(){return mi},motivo,colocar,set sel(v){sel=v},cel,setM:n=>{mi=n;iniciarMissao();}};
+window.__pb={get mode(){return mode},get G(){return G},get est(){return est},get pts(){return pts},get mi(){return mi},motivo,colocar,set sel(v){sel=v},cel,
+  setM:n=>{mi=n;iniciarMissao();}};
 </script>
 </body>
 </html>
